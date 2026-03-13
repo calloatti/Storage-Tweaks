@@ -3,7 +3,7 @@ using Timberborn.BlockSystem;
 using UnityEngine;
 using System.Reflection;
 using System.Collections.Generic;
-using System;
+
 
 namespace Calloatti.StorageTweaks
 {
@@ -61,7 +61,8 @@ namespace Calloatti.StorageTweaks
             // Direct dictionary lookup is O(1) and very fast.
             if (EnableVisualScaling && VisualizerCache.Ratios.TryGetValue(__instance.GetInstanceID(), out float ratio))
             {
-                amountInStock = Mathf.CeilToInt(amountInStock * ratio);
+                amountInStock = Mathf.RoundToInt(amountInStock * ratio);
+                //Debug.Log($"[StorageTweaks] amountInStock: {amountInStock}");
             }
 
             return true;

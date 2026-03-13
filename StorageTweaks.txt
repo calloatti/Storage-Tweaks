@@ -21,3 +21,5 @@ UndergroundPile.Folktails=1000 # Default: 1000
 ReservePile=160 # Default: 160
 ReserveTank=300 # Default: 300
 ReserveWarehouse=200 # Default: 200
+WarehousePile.Folktails=1000 # Default: 1000
+WarehousePile.IronTeeth=1000 # Default: 1000
