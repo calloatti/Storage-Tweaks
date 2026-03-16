@@ -29,6 +29,13 @@
     "MaxCapacity": 1000,
     "WhitelistedGoodType": "Pileable"
   },
+  "EnterableSpec": {
+    "OperatingState": "Finished",
+    "LimitedCapacityFinished": false,
+    "CapacityFinished": 0,
+    "LimitedCapacityUnfinished": false,
+    "CapacityUnfinished": 0
+  },
   "StockpileGoodPileVisualizerSpec": {
     "CenterOffset": {
       "X": 0.5,
@@ -220,12 +227,12 @@
     },
     "ForceOneFinalAccess": false
   },
-  "EnterableSpec": {
-    "OperatingState": "Finished",
-    "LimitedCapacityFinished": false,
-    "CapacityFinished": 0,
-    "LimitedCapacityUnfinished": false,
-    "CapacityUnfinished": 0
+  "BlockObjectNavMeshSettingsSpec": {
+    "NoAutoWalls": false,
+    "GenerateFloorsOnStackable": true,
+    "EdgeGroups": [],
+    "UnblockedCoordinates": [],
+    "BlockedEdges": []
   },
   "PlaceableBlockObjectSpec": {
     "ToolGroupId": "Storage",
