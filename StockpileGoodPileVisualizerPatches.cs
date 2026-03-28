@@ -1,78 +1,106 @@
 ﻿using HarmonyLib;
-using Timberborn.BlockSystem;
 using UnityEngine;
+using Timberborn.Stockpiles;
+using Timberborn.TemplateSystem;
+using Timberborn.StockpileVisualization;
 using System.Reflection;
-using System.Collections.Generic;
-
+using System.Runtime.CompilerServices;
 
 namespace Calloatti.StorageTweaks
 {
-    public static class VisualizerCache
+  public static class VisualizerCache
+  {
+    public class RatioWrapper
     {
-        public static Dictionary<int, float> Ratios = new Dictionary<int, float>();
+      public float Ratio;
     }
 
-    [HarmonyPatch]
-    public static class StockpileVisualizerPatches
+    public static ConditionalWeakTable<StockpileGoodPileVisualizer, RatioWrapper> Ratios = new ConditionalWeakTable<StockpileGoodPileVisualizer, RatioWrapper>();
+  }
+
+  [HarmonyPatch]
+  public static class StockpileGoodPileVisualizerPatches
+  {
+    public static bool EnableVisualScaling = true;
+
+    private static int _tempCapacity = -1;
+
+    // --- 1. MEMORY OPTIMIZATION PATCH ---
+    [HarmonyPatch(typeof(GoodPileVariantsService), "LoadVisualizerVariants")]
+    [HarmonyPrefix]
+    public static void Prefix(StockpileGoodPileVisualizerSpec visualizer)
     {
-        // --- SCREENSHOT TOGGLE ---
-        public static bool EnableVisualScaling = true;
-        // -------------------------
+      var templateSpec = visualizer.GetSpec<TemplateSpec>();
 
-        [HarmonyPatch("Timberborn.StockpileVisualization.StockpileGoodPileVisualizer", "Initialize")]
-        [HarmonyPostfix]
-        public static void InitializePostfix(MonoBehaviour __instance, int capacity)
+      if (templateSpec != null && StorageCapacityPatcher.VisualLimits.TryGetValue(templateSpec.TemplateName, out int visualLimit))
+      {
+        var stockpileSpec = visualizer.GetSpec<StockpileSpec>();
+        // Only throttle the mesh generation if the capacity exceeds the physical visual bounds
+        if (stockpileSpec != null && stockpileSpec.MaxCapacity > visualLimit)
         {
-            try
-            {
-                var type = __instance.GetType();
-                var blockObjField = type.GetField("_blockObject", BindingFlags.NonPublic | BindingFlags.Instance);
-                var perLevelField = type.GetField("_perLevelAmount", BindingFlags.NonPublic | BindingFlags.Instance);
-
-                if (blockObjField == null || perLevelField == null) return;
-
-                var blockObject = blockObjField.GetValue(__instance) as BlockObject;
-                int itemsPerLayer = (int)perLevelField.GetValue(__instance);
-
-                if (blockObject != null && blockObject.Blocks != null && itemsPerLayer > 0)
-                {
-                    // Calculate the standard visual capacity (e.g., 180 for small pile)
-                    int maxVisualCapacity = itemsPerLayer * blockObject.Blocks.Size.z * 5;
-
-                    // Store the ratio (Visual Limit / Real Modded Capacity)
-                    VisualizerCache.Ratios[__instance.GetInstanceID()] = (float)maxVisualCapacity / (float)capacity;
-                }
-            }
-            catch { }
+          _tempCapacity = stockpileSpec.MaxCapacity;
+          var field = typeof(StockpileSpec).GetField("<MaxCapacity>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
+          field?.SetValue(stockpileSpec, visualLimit);
         }
-
-        [HarmonyPatch("Timberborn.StockpileVisualization.StockpileGoodPileVisualizer", "UpdateAmount")]
-        [HarmonyPrefix]
-        public static bool UpdateAmountPrefix(MonoBehaviour __instance, ref int amountInStock)
-        {
-            // High-performance check: Verify the instance exists and hasn't been destroyed.
-            // The !__instance check is the Unity-specific way to catch 'fake-null' objects
-            // left behind by removed mods.
-            if (__instance == null || !__instance)
-            {
-                return true;
-            }
-
-            // Direct dictionary lookup is O(1) and very fast.
-            if (EnableVisualScaling && VisualizerCache.Ratios.TryGetValue(__instance.GetInstanceID(), out float ratio))
-            {
-                amountInStock = Mathf.RoundToInt(amountInStock * ratio);
-                //Debug.Log($"[StorageTweaks] amountInStock: {amountInStock}");
-            }
-
-            return true;
-        }
-
-        [HarmonyPatch("Timberborn.StockpileVisualization.StockpileGoodPileVisualizer", "Clear")]
-        [HarmonyPostfix]
-        public static void ClearPostfix(MonoBehaviour __instance)
-        {
-            VisualizerCache.Ratios.Remove(__instance.GetInstanceID());
-        }
+      }
     }
+
+    [HarmonyPatch(typeof(GoodPileVariantsService), "LoadVisualizerVariants")]
+    [HarmonyPostfix]
+    public static void Postfix(StockpileGoodPileVisualizerSpec visualizer)
+    {
+      if (_tempCapacity != -1)
+      {
+        var stockpileSpec = visualizer.GetSpec<StockpileSpec>();
+        if (stockpileSpec != null)
+        {
+          var field = typeof(StockpileSpec).GetField("<MaxCapacity>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
+          field?.SetValue(stockpileSpec, _tempCapacity);
+        }
+        _tempCapacity = -1;
+      }
+    }
+
+    // --- 2. RELIABLE SCALING INITIALIZATION ---
+    [HarmonyPatch(typeof(StockpileGoodPileVisualizer), "Initialize")]
+    [HarmonyPostfix]
+    public static void InitializePostfix(StockpileGoodPileVisualizer __instance, int capacity)
+    {
+      var template = __instance.GetComponent<TemplateSpec>();
+      if (template != null && StorageCapacityPatcher.VisualLimits.TryGetValue(template.TemplateName, out int visualLimit))
+      {
+        if (capacity > 0)
+        {
+          var wrapper = VisualizerCache.Ratios.GetOrCreateValue(__instance);
+          // Scale down if capacity > visual limit. Otherwise, use a 1:1 ratio.
+          wrapper.Ratio = capacity > visualLimit ? ((float)visualLimit / capacity) : 1f;
+        }
+      }
+    }
+
+    // --- 3. APPLY VISUAL SCALING ---
+    [HarmonyPatch(typeof(StockpileGoodPileVisualizer), "UpdateAmount")]
+    [HarmonyPrefix]
+    public static bool UpdateAmountPrefix(StockpileGoodPileVisualizer __instance, ref int amountInStock)
+    {
+      if (!EnableVisualScaling || __instance == null) return true;
+
+      if (VisualizerCache.Ratios.TryGetValue(__instance, out VisualizerCache.RatioWrapper wrapper))
+      {
+        amountInStock = Mathf.RoundToInt(amountInStock * wrapper.Ratio);
+      }
+
+      return true;
+    }
+
+    [HarmonyPatch(typeof(StockpileGoodPileVisualizer), "Clear")]
+    [HarmonyPostfix]
+    public static void ClearPostfix(StockpileGoodPileVisualizer __instance)
+    {
+      if (__instance != null)
+      {
+        VisualizerCache.Ratios.Remove(__instance);
+      }
+    }
+  }
 }

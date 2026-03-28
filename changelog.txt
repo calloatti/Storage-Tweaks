@@ -1,0 +1,6 @@
+2.0.3
+Refactored to use simpleconfig.
+2.0.2
+Moved config file to PlayerData. Default capacities are used when creating the file for the first time
+2.0.1
+Fixed WarehousePile blueprints

@@ -1,8 +1,8 @@
 {
   "Name": "Storage Tweaks",
-  "Version": "2.0.2",
+  "Version": "2.0.3",
   "Id": "calloatti.storagetweaks",
-  "MinimumGameVersion": "1.0.0.0",
+  "MinimumGameVersion": "1.0.12.5",
   "Description": "Some adjustements to capacities of storage",
   "RequiredMods": [{"Id": "Harmony", "MinVersion": "2.4.1"}],
   "OptionalMods": []
