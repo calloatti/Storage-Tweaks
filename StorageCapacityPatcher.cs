@@ -12,7 +12,6 @@ namespace Calloatti.StorageTweaks
   [HarmonyPatch("Timberborn.BlueprintSystem.SpecService", "Load")]
   public static class StorageCapacityPatcher
   {
-    private static bool DebugMode = false;
 
     // Store the true calculated visual limits based on building size
     public static readonly Dictionary<string, int> VisualLimits = new Dictionary<string, int>();
@@ -79,7 +78,7 @@ namespace Calloatti.StorageTweaks
               fileModified = true;
             }
 
-            if (DebugMode) Debug.Log($"[StorageTweaks] Processed {blueprint.Name} | Default: {defaultCap} | Modded: {moddedCap} | Limit: {visualLimit}");
+            Debug.Log($"[StorageTweaks] {blueprint.Name} | Default: {defaultCap} | Modded: {moddedCap} | Limit: {visualLimit}");
 
             // 3. Apply modded capacity if it differs from the default
             if (moddedCap != defaultCap)
@@ -92,7 +91,7 @@ namespace Calloatti.StorageTweaks
 
         if (fileModified)
         {
-          if (DebugMode) Debug.Log("[StorageTweaks] Saving dynamic keys via SimpleConfig...");
+          Debug.Log("[StorageTweaks] Saving dynamic keys via SimpleConfig...");
           ModStarter.Config.Save();
         }
       }
