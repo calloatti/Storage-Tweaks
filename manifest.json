@@ -1,6 +1,6 @@
 {
   "Name": "Storage Tweaks",
-  "Version": "2.0.3",
+  "Version": "2.0.4",
   "Id": "calloatti.storagetweaks",
   "MinimumGameVersion": "1.0.12.5",
   "Description": "Some adjustements to capacities of storage",

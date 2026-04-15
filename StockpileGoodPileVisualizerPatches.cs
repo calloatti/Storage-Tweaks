@@ -3,7 +3,6 @@ using UnityEngine;
 using Timberborn.Stockpiles;
 using Timberborn.TemplateSystem;
 using Timberborn.StockpileVisualization;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace Calloatti.StorageTweaks
@@ -39,8 +38,7 @@ namespace Calloatti.StorageTweaks
         if (stockpileSpec != null && stockpileSpec.MaxCapacity > visualLimit)
         {
           _tempCapacity = stockpileSpec.MaxCapacity;
-          var field = typeof(StockpileSpec).GetField("<MaxCapacity>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
-          field?.SetValue(stockpileSpec, visualLimit);
+          StorageCapacityPatcher.MaxCapacityField?.SetValue(stockpileSpec, visualLimit);
         }
       }
     }
@@ -54,8 +52,7 @@ namespace Calloatti.StorageTweaks
         var stockpileSpec = visualizer.GetSpec<StockpileSpec>();
         if (stockpileSpec != null)
         {
-          var field = typeof(StockpileSpec).GetField("<MaxCapacity>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
-          field?.SetValue(stockpileSpec, _tempCapacity);
+          StorageCapacityPatcher.MaxCapacityField?.SetValue(stockpileSpec, _tempCapacity);
         }
         _tempCapacity = -1;
       }

@@ -1,6 +1,5 @@
 ﻿using HarmonyLib;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
@@ -9,83 +8,80 @@ using Timberborn.BlueprintSystem;
 
 namespace Calloatti.StorageTweaks
 {
-  [HarmonyPatch("Timberborn.BlueprintSystem.SpecService", "Load")]
+  [HarmonyPatch(typeof(SpecService), "Load")]
   public static class StorageCapacityPatcher
   {
-
     // Store the true calculated visual limits based on building size
     public static readonly Dictionary<string, int> VisualLimits = new Dictionary<string, int>();
 
+    // Cache the backing field once so we aren't calling GetField in loops.
+    // This is required because MaxCapacity is an { get; init; } property on a record.
+    public static readonly FieldInfo MaxCapacityField = typeof(StockpileSpec).GetField("<MaxCapacity>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
+
     [HarmonyPostfix]
-    public static void Postfix(object __instance)
+    public static void Postfix(SpecService __instance)
     {
       Debug.Log("[StorageTweaks] SpecService.Load Postfix started. Applying capacities...");
       ProcessConfig(__instance);
       Debug.Log("[StorageTweaks] Finished applying storage capacities.");
     }
 
-    private static void ProcessConfig(object specService)
+    private static void ProcessConfig(SpecService specService)
     {
       try
       {
         bool fileModified = false;
         VisualLimits.Clear();
 
-        var type = specService.GetType();
-        var sourceService = type.GetField("_blueprintSourceService", BindingFlags.NonPublic | BindingFlags.Instance)?.GetValue(specService) as BlueprintSourceService;
-        var deserializer = type.GetField("_blueprintDeserializer", BindingFlags.NonPublic | BindingFlags.Instance)?.GetValue(specService) as BlueprintDeserializer;
-        var specDict = type.GetField("_cachedBlueprintsBySpecs", BindingFlags.NonPublic | BindingFlags.Instance)?.GetValue(specService) as IDictionary;
+        // Directly access publicized fields - no reflection needed
+        var sourceService = specService._blueprintSourceService;
+        var deserializer = specService._blueprintDeserializer;
+        var specDict = specService._cachedBlueprintsBySpecs;
 
         if (specDict == null || deserializer == null || sourceService == null) return;
 
-        foreach (DictionaryEntry entry in specDict)
+        // Native dictionary lookup instead of enumerating everything
+        if (!specDict.TryGetValue(typeof(StockpileSpec), out var lazyList)) return;
+
+        foreach (var lazyObj in lazyList)
         {
-          if ((Type)entry.Key != typeof(StockpileSpec)) continue;
+          var blueprint = lazyObj.Value;
+          if (blueprint == null) continue;
 
-          var lazyList = entry.Value as IList;
-          if (lazyList == null) continue;
-
-          foreach (object lazyObj in lazyList)
+          // --- CALCULATE TRUE VISUAL LIMIT ---
+          // Use the VolumeCalculator to find the physical bounds of the mesh
+          int visualLimit = Mathf.RoundToInt(VolumeCalculator.Calculate(blueprint));
+          if (visualLimit > 0)
           {
-            var blueprint = lazyObj.GetType().GetProperty("Value")?.GetValue(lazyObj) as Blueprint;
-            if (blueprint == null) continue;
+            VisualLimits[blueprint.Name] = visualLimit;
+          }
 
-            // --- CALCULATE TRUE VISUAL LIMIT ---
-            // Use the VolumeCalculator to find the physical bounds of the mesh
-            int visualLimit = Mathf.RoundToInt(VolumeCalculator.Calculate(blueprint));
-            if (visualLimit > 0)
-            {
-              VisualLimits[blueprint.Name] = visualLimit;
-            }
+          // 1. Get Default Capacity
+          string rawJson = OriginalCapacityFetcher.GetRawJson(sourceService, blueprint);
+          int defaultCap = OriginalCapacityFetcher.GetOriginalCapacity(blueprint, rawJson);
+          if (defaultCap <= 0) defaultCap = blueprint.GetSpec<StockpileSpec>().MaxCapacity;
 
-            // 1. Get Default Capacity
-            string rawJson = OriginalCapacityFetcher.GetRawJson(sourceService, blueprint);
-            int defaultCap = OriginalCapacityFetcher.GetOriginalCapacity(deserializer, blueprint, rawJson);
-            if (defaultCap <= 0) defaultCap = blueprint.GetSpec<StockpileSpec>().MaxCapacity;
+          // 2. Modded Capacity using SimpleConfig
+          int moddedCap = defaultCap;
 
-            // 2. Modded Capacity using SimpleConfig
-            int moddedCap = defaultCap;
+          if (ModStarter.Config.HasKey(blueprint.Name))
+          {
+            moddedCap = ModStarter.Config.GetInt(blueprint.Name);
+            if (moddedCap <= 0) moddedCap = defaultCap;
+          }
+          else
+          {
+            ModStarter.Config.Set(blueprint.Name, defaultCap);
+            ModStarter.Config.SetComment(blueprint.Name, $"Default value: {defaultCap}");
+            fileModified = true;
+          }
 
-            if (ModStarter.Config.HasKey(blueprint.Name))
-            {
-              moddedCap = ModStarter.Config.GetInt(blueprint.Name);
-              if (moddedCap <= 0) moddedCap = defaultCap;
-            }
-            else
-            {
-              ModStarter.Config.Set(blueprint.Name, defaultCap);
-              ModStarter.Config.SetComment(blueprint.Name, $"Default value: {defaultCap}");
-              fileModified = true;
-            }
+          Debug.Log($"[StorageTweaks] {blueprint.Name} | Default: {defaultCap} | Modded: {moddedCap} | Limit: {visualLimit}");
 
-            Debug.Log($"[StorageTweaks] {blueprint.Name} | Default: {defaultCap} | Modded: {moddedCap} | Limit: {visualLimit}");
-
-            // 3. Apply modded capacity if it differs from the default
-            if (moddedCap != defaultCap)
-            {
-              var field = typeof(StockpileSpec).GetField("<MaxCapacity>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance);
-              field?.SetValue(blueprint.GetSpec<StockpileSpec>(), moddedCap);
-            }
+          // 3. Apply modded capacity if it differs from the default
+          if (moddedCap != defaultCap)
+          {
+            MaxCapacityField?.SetValue(blueprint.GetSpec<StockpileSpec>(), moddedCap);
           }
         }
 

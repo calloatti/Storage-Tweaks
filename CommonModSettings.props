@@ -25,6 +25,7 @@
     <Publicize Include="Timberborn.BlockObjectModelSystem" />
     <Publicize Include="Timberborn.BlockObjectTools" />
     <Publicize Include="Timberborn.BlockSystem" />
+    <Publicize Include="Timberborn.BlueprintSystem" />
     <Publicize Include="Timberborn.Buildings" />
     <Publicize Include="Timberborn.BuildingsNavigation" />
     <Publicize Include="Timberborn.BuildingsReachability" />
@@ -40,8 +41,8 @@
     <Publicize Include="Timberborn.PathSystem" />
     <Publicize Include="Timberborn.Rendering" />
     <Publicize Include="Timberborn.SlotSystem" />
-    <Publicize Include="Timberborn.Stockpiles" />
     <Publicize Include="Timberborn.StockpileVisualization" />
+    <Publicize Include="Timberborn.Stockpiles" />
     <Publicize Include="Timberborn.TerrainSystemRendering" />
     <Publicize Include="Timberborn.ToolButtonSystem" />
     <Publicize Include="Timberborn.WaterBuildings" />

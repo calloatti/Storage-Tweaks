@@ -1,3 +1,5 @@
+2.0.4
+Got rid of reflection.
 2.0.3
 Refactored to use simpleconfig.
 2.0.2
