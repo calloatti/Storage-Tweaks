@@ -1,20 +1,15 @@
---------------------------------------------------------------------------------
-Game Version: 1.0.0.0
-Mod Version: 2.0.4
+Game Version: 1.0.0.0 - Mod Version: 2.0.4
 - Got rid of reflection.
 --------------------------------------------------------------------------------
-Game Version: 1.0.0.0
-Mod Version: 2.0.3
+Game Version: 1.0.0.0 - Mod Version: 2.0.3
 - Refactored to use simpleconfig.
 --------------------------------------------------------------------------------
-Game Version: 1.0.0.0
-Mod Version: 2.0.2
+Game Version: 1.0.0.0 - Mod Version: 2.0.2
 - Moved config file to PlayerData. Default capacities are used when creating the file for the first time
 --------------------------------------------------------------------------------
-Game Version: 1.0.0.0
-Mod Version: 2.0.1
+Game Version: 1.0.0.0 - Mod Version: 2.0.1
 - Fixed WarehousePile blueprints
 --------------------------------------------------------------------------------
-Game Version: 1.0.0.0
-Mod Version: 2.0.1
+Game Version: 1.0.0.0 - Mod Version: 2.0.1
 - Added Warehouse Pile
+--------------------------------------------------------------------------------
