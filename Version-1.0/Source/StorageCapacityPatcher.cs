@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 using Timberborn.Stockpiles;
 using Timberborn.BlueprintSystem;
@@ -14,9 +13,9 @@ namespace Calloatti.StorageTweaks
     // Store the true calculated visual limits based on building size
     public static readonly Dictionary<string, int> VisualLimits = new Dictionary<string, int>();
 
-    // Cache the backing field once so we aren't calling GetField in loops.
+    // Replaced Reflection FieldInfo with Harmony's FieldRef for direct, zero-allocation memory access.
     // This is required because MaxCapacity is an { get; init; } property on a record.
-    public static readonly FieldInfo MaxCapacityField = typeof(StockpileSpec).GetField("<MaxCapacity>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
+    public static AccessTools.FieldRef<StockpileSpec, int> MaxCapacityRef = AccessTools.FieldRefAccess<StockpileSpec, int>("<MaxCapacity>k__BackingField");
 
     [HarmonyPostfix]
     public static void Postfix(SpecService __instance)
@@ -30,7 +29,6 @@ namespace Calloatti.StorageTweaks
     {
       try
       {
-        bool fileModified = false;
         VisualLimits.Clear();
 
         // Directly access publicized fields - no reflection needed
@@ -72,24 +70,33 @@ namespace Calloatti.StorageTweaks
           else
           {
             ModStarter.Config.Set(blueprint.Name, defaultCap);
-            ModStarter.Config.SetComment(blueprint.Name, $"Default value: {defaultCap}");
-            fileModified = true;
           }
+
+          // Always apply SetInlineComment to force legacy file comments into the modern layout structure
+          ModStarter.Config.SetInlineComment(
+            key: blueprint.Name,
+            type: "int",
+            defaultValue: defaultCap,
+            label: blueprint.Name,
+            tooltip: "Sets the maximum item capacity for this storage building.",
+            controlType: "slider",
+            minValue: 1,
+            maxValue: 100000,
+            step: 10,
+            requiresReload: true
+          );
 
           Debug.Log($"[StorageTweaks] {blueprint.Name} | Default: {defaultCap} | Modded: {moddedCap} | Limit: {visualLimit}");
 
           // 3. Apply modded capacity if it differs from the default
           if (moddedCap != defaultCap)
           {
-            MaxCapacityField?.SetValue(blueprint.GetSpec<StockpileSpec>(), moddedCap);
+            MaxCapacityRef(blueprint.GetSpec<StockpileSpec>()) = moddedCap;
           }
         }
 
-        if (fileModified)
-        {
-          Debug.Log("[StorageTweaks] Saving dynamic keys via SimpleConfig...");
-          ModStarter.Config.Save();
-        }
+        Debug.Log("[StorageTweaks] Saving dynamic keys via SimpleConfig...");
+        ModStarter.Config.Save();
       }
       catch (Exception ex)
       {

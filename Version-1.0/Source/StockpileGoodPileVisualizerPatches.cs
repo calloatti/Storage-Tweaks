@@ -22,13 +22,12 @@ namespace Calloatti.StorageTweaks
   {
     public static bool EnableVisualScaling = true;
 
-    private static int _tempCapacity = -1;
-
     // --- 1. MEMORY OPTIMIZATION PATCH ---
     [HarmonyPatch(typeof(GoodPileVariantsService), "LoadVisualizerVariants")]
     [HarmonyPrefix]
-    public static void Prefix(StockpileGoodPileVisualizerSpec visualizer)
+    public static void Prefix(StockpileGoodPileVisualizerSpec visualizer, out int __state)
     {
+      __state = -1; // Default state
       var templateSpec = visualizer.GetSpec<TemplateSpec>();
 
       if (templateSpec != null && StorageCapacityPatcher.VisualLimits.TryGetValue(templateSpec.TemplateName, out int visualLimit))
@@ -37,24 +36,24 @@ namespace Calloatti.StorageTweaks
         // Only throttle the mesh generation if the capacity exceeds the physical visual bounds
         if (stockpileSpec != null && stockpileSpec.MaxCapacity > visualLimit)
         {
-          _tempCapacity = stockpileSpec.MaxCapacity;
-          StorageCapacityPatcher.MaxCapacityField?.SetValue(stockpileSpec, visualLimit);
+          __state = stockpileSpec.MaxCapacity; // Pass the original capacity to the Postfix
+          StorageCapacityPatcher.MaxCapacityRef(stockpileSpec) = visualLimit;
         }
       }
     }
 
     [HarmonyPatch(typeof(GoodPileVariantsService), "LoadVisualizerVariants")]
     [HarmonyPostfix]
-    public static void Postfix(StockpileGoodPileVisualizerSpec visualizer)
+    public static void Postfix(StockpileGoodPileVisualizerSpec visualizer, int __state)
     {
-      if (_tempCapacity != -1)
+      // If __state is not -1, we modified the capacity in the Prefix
+      if (__state != -1)
       {
         var stockpileSpec = visualizer.GetSpec<StockpileSpec>();
         if (stockpileSpec != null)
         {
-          StorageCapacityPatcher.MaxCapacityField?.SetValue(stockpileSpec, _tempCapacity);
+          StorageCapacityPatcher.MaxCapacityRef(stockpileSpec) = __state;
         }
-        _tempCapacity = -1;
       }
     }
 

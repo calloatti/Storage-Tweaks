@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using Timberborn.BlueprintSystem;
 
@@ -6,6 +7,9 @@ namespace Calloatti.StorageTweaks
 {
   public static class OriginalCapacityFetcher
   {
+    // Regex to safely extract MaxCapacity despite JSON spacing variations
+    private static readonly Regex CapacityRegex = new Regex(@"\""MaxCapacity\""\s*:\s*(\d+)", RegexOptions.Compiled);
+
     // --- 1. SAFE JSON RETRIEVAL ---
     public static string GetRawJson(BlueprintSourceService sourceService, Blueprint blueprint)
     {
@@ -35,24 +39,10 @@ namespace Calloatti.StorageTweaks
 
       try
       {
-        // We extract the capacity directly from the JSON string.
-        // This eliminates the need to trick the game into re-deserializing the bundle.
-        string searchKey = "\"MaxCapacity\":";
-        int index = originalJson.IndexOf(searchKey, StringComparison.OrdinalIgnoreCase);
-
-        if (index != -1)
+        var match = CapacityRegex.Match(originalJson);
+        if (match.Success && int.TryParse(match.Groups[1].Value, out int capacity))
         {
-          int startIndex = index + searchKey.Length;
-          int endIndex = originalJson.IndexOfAny(new char[] { ',', '}' }, startIndex);
-
-          if (endIndex != -1)
-          {
-            string valueStr = originalJson.Substring(startIndex, endIndex - startIndex).Trim();
-            if (int.TryParse(valueStr, out int capacity))
-            {
-              return capacity;
-            }
-          }
+          return capacity;
         }
       }
       catch (Exception ex)
