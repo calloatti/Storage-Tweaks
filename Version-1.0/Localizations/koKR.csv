@@ -1,0 +1,7 @@
+ID,Text,Comment
+Calloatti.Building.WarehousePile.DisplayName,"창고 더미",
+Calloatti.Building.WarehousePile.Description,"창고에 부피가 큰 물건을 보관합니다",
+Calloatti.Building.WarehousePile.FlavorDescription,"더미보다 나은 건? 창고 더미",
+Calloatti.Config.UseBagsForDirt.Label,"진흙에 자루 사용",
+Calloatti.Config.UseBagsForDirt.Tooltip,"True인 경우, 진흙이 더미 대신 자루로 표시됩니다.",
+Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip,"이 저장 건물의 최대 용량을 설정합니다.",

@@ -1,0 +1,7 @@
+ID,Text,Comment
+Calloatti.Building.WarehousePile.DisplayName,"Pilha de armazém",
+Calloatti.Building.WarehousePile.Description,"Armazena mercadorias volumosas em um armazém",
+Calloatti.Building.WarehousePile.FlavorDescription,"O que é melhor do que uma pilha? Uma pilha de armazém",
+Calloatti.Config.UseBagsForDirt.Label,"Usar Sacos para Terra",
+Calloatti.Config.UseBagsForDirt.Tooltip,"Se verdadeiro, a Terra será visualizada como sacos em vez de uma pilha.",
+Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip,"Define a capacidade máxima para este edifício de armazenamento.",

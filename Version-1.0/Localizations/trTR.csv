@@ -1,0 +1,7 @@
+ID,Text,Comment
+Calloatti.Building.WarehousePile.DisplayName,"Depo Yığını",
+Calloatti.Building.WarehousePile.Description,"Hacimli malları bir depoda saklar",
+Calloatti.Building.WarehousePile.FlavorDescription,"Bir yığından daha iyi ne olabilir? Bir depo yığını",
+Calloatti.Config.UseBagsForDirt.Label,"Toprak İçin Çantaları Kullan",
+Calloatti.Config.UseBagsForDirt.Tooltip,"Doğruysa, Toprak bir yığın yerine çantalar olarak görselleştirilir.",
+Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip,"Bu depolama binası için maksimum kapasiteyi ayarlar.",

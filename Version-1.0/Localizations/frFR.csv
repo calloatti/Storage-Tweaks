@@ -1,0 +1,7 @@
+ID,Text,Comment
+Calloatti.Building.WarehousePile.DisplayName,"Tas d'entrepôt",
+Calloatti.Building.WarehousePile.Description,"Stocke les marchandises volumineuses dans un entrepôt",
+Calloatti.Building.WarehousePile.FlavorDescription,"Qu'y a-t-il de mieux qu'un tas ? Un tas d'entrepôt",
+Calloatti.Config.UseBagsForDirt.Label,"Utiliser des Sacs pour la Terre",
+Calloatti.Config.UseBagsForDirt.Tooltip,"Si vrai, la Terre sera visualisée sous forme de sacs au lieu d'un tas.",
+Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip,"Définit la capacité maximale de ce bâtiment de stockage.",

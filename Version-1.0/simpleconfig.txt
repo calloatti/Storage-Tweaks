@@ -1,1 +1,13 @@
 ConfigFileName = "StorageTweaks.txt"
+
+Key = "UseBagsForDirt"
+Type = "bool"
+DefaultValue = false
+Label = Calloatti.Config.UseBagsForDirt.Label
+Tooltip = Calloatti.Config.UseBagsForDirt.Tooltip
+ControlType = "Toggle"
+AvailableInMainMenu = true
+AvailableInGame = true
+AvailableInMapEditor = true
+RequiresReload = true
+RequiresRestart = false

@@ -7,4 +7,10 @@
 
   <Import Project="CommonModSettings.props" />
 
+  <ItemGroup>
+    <None Update="GoodVisualization\GoodVisualization.Dirt.blueprint.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

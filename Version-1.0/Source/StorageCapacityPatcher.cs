@@ -1,9 +1,11 @@
 ﻿using HarmonyLib;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
-using Timberborn.Stockpiles;
+using System.Reflection;
 using Timberborn.BlueprintSystem;
+using Timberborn.EntitySystem;
+using Timberborn.Stockpiles;
+using UnityEngine;
 
 namespace Calloatti.StorageTweaks
 {
@@ -59,30 +61,39 @@ namespace Calloatti.StorageTweaks
           int defaultCap = OriginalCapacityFetcher.GetOriginalCapacity(blueprint, rawJson);
           if (defaultCap <= 0) defaultCap = blueprint.GetSpec<StockpileSpec>().MaxCapacity;
 
-          // 2. Modded Capacity using SimpleConfig
+          // 2. Modded Capacity using SimpleConfig (with Defensive Auto-Repair)
           int moddedCap = defaultCap;
 
           if (ModStarter.Config.HasKey(blueprint.Name))
           {
             moddedCap = ModStarter.Config.GetInt(blueprint.Name);
-            if (moddedCap <= 0) moddedCap = defaultCap;
+
+            // DEFENSIVE CHECK: If the key exists but is 0 or negative, heal it!
+            if (moddedCap <= 0)
+            {
+              moddedCap = defaultCap;
+              ModStarter.Config.InsertOrUpdate(blueprint.Name, moddedCap);
+            }
           }
           else
           {
-            ModStarter.Config.Set(blueprint.Name, defaultCap);
+            // Brand new entry: Safe initial insert
+            ModStarter.Config.InsertOrUpdate(blueprint.Name, moddedCap);
           }
+
+          string locKey = blueprint.GetSpec<LabeledEntitySpec>()?.DisplayNameLocKey ?? blueprint.Name;
 
           // Always apply SetInlineComment to force legacy file comments into the modern layout structure
           ModStarter.Config.SetInlineComment(
             key: blueprint.Name,
             type: "int",
             defaultValue: defaultCap,
-            label: blueprint.Name,
-            tooltip: "Sets the maximum item capacity for this storage building.",
-            controlType: "slider",
-            minValue: 1,
-            maxValue: 100000,
-            step: 10,
+            label: locKey,
+            tooltip: "Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip",
+            controlType: "Slider", // Capitalized for consistency
+            minValue: 1f, // Added 'f' for float? signature
+            maxValue: defaultCap * 10f, // Added 'f' for float? signature
+            step: 10f, // Added 'f' for float? signature
             requiresReload: true
           );
 

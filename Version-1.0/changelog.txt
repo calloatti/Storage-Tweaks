@@ -1,3 +1,11 @@
+Game Version: 1.0.0.0 - Mod Version: 2.1.1
+- SimpleConfig UI integration
+--------------------------------------------------------------------------------
+Game Version: 1.0.0.0 - Mod Version: 2.1.0
+- Added simple mod settings support
+- Added dirt in bags visualizer optional, off by default
+- TODO: A better model for dirt bags
+--------------------------------------------------------------------------------
 Game Version: 1.0.0.0 - Mod Version: 2.0.5
 - Fixed thread-safety race conditions in stockpile visualizer scaling.
 - Improved robustness of JSON parsing by utilizing Regex.

@@ -1,0 +1,7 @@
+ID,Text,Comment
+Calloatti.Building.WarehousePile.DisplayName,"Pila di magazzino",
+Calloatti.Building.WarehousePile.Description,"Conserva merci ingombranti in un magazzino",
+Calloatti.Building.WarehousePile.FlavorDescription,"Cosa c'è di meglio di una pila? Una pila di magazzino",
+Calloatti.Config.UseBagsForDirt.Label,"Usa Sacchi per il Terriccio",
+Calloatti.Config.UseBagsForDirt.Tooltip,"Se vero, il Terriccio sarà visualizzato come sacchi invece di una pila.",
+Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip,"Imposta la capacità massima per questo edificio di stoccaggio.",
