@@ -1,7 +1,7 @@
 ID,Text,Comment
-Calloatti.Building.WarehousePile.DisplayName,"Pila de almacén",
+Calloatti.Building.WarehousePile.DisplayName,"Montón de almacén",
 Calloatti.Building.WarehousePile.Description,"Almacena mercancías voluminosas en un almacén",
-Calloatti.Building.WarehousePile.FlavorDescription,"¿Qué es mejor que una pila? Una pila de almacén",
-Calloatti.Config.UseBagsForDirt.Label,"Usar Bolsas para Tierra",
-Calloatti.Config.UseBagsForDirt.Tooltip,"Si es verdadero, la Tierra se visualizará como bolsas en lugar de una pila.",
+Calloatti.Building.WarehousePile.FlavorDescription,"¿Qué es mejor que un montón? ¡Un montón de almacén!",
+Calloatti.Config.UseBagsForDirt.Label,"Usar bolsas para tierra",
+Calloatti.Config.UseBagsForDirt.Tooltip,"Si está activado, la tierra se visualizará como bolsas en lugar de un montón.",
 Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip,"Establece la capacidad máxima para este edificio de almacenamiento.",

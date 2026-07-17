@@ -1,7 +1,7 @@
 ID,Text,Comment
-Calloatti.Building.WarehousePile.DisplayName,"仓库材料堆",
-Calloatti.Building.WarehousePile.Description,"在仓库中储存大件货物",
-Calloatti.Building.WarehousePile.FlavorDescription,"比材料堆更好的方式是什么？仓库材料堆",
+Calloatti.Building.WarehousePile.DisplayName,"仓库堆",
+Calloatti.Building.WarehousePile.Description,"在仓库中存储 bulky 货物",
+Calloatti.Building.WarehousePile.FlavorDescription,"什么比一堆更好？一堆仓库堆！",
 Calloatti.Config.UseBagsForDirt.Label,"使用袋子装泥土",
-Calloatti.Config.UseBagsForDirt.Tooltip,"如果为真，泥土将以袋子的形式显示，而不是堆状。",
+Calloatti.Config.UseBagsForDirt.Tooltip,"如果启用，泥土将以袋子的形式显示，而不是堆状。",
 Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip,"设置此存储建筑的最大容量。",

@@ -1,7 +1,7 @@
 ID,Text,Comment
-Calloatti.Building.WarehousePile.DisplayName,"倉庫物資置き場",
-Calloatti.Building.WarehousePile.Description,"倉庫にかさばる商品を保管します",
-Calloatti.Building.WarehousePile.FlavorDescription,"物資置き場よりいいもの？倉庫物資置き場",
-Calloatti.Config.UseBagsForDirt.Label,"土砂に袋を使用",
-Calloatti.Config.UseBagsForDirt.Tooltip,"Trueの場合、土砂は山の代わりに袋として表示されます。",
-Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip,"この保管建物の最大容量を設定します。",
+Calloatti.Building.WarehousePile.DisplayName,"倉庫の山",
+Calloatti.Building.WarehousePile.Description,"かさばる品物を倉庫に保管します",
+Calloatti.Building.WarehousePile.FlavorDescription,"山よりいいものって？倉庫の山だよ！",
+Calloatti.Config.UseBagsForDirt.Label,"土に袋を使用",
+Calloatti.Config.UseBagsForDirt.Tooltip,"オンの場合、土は山ではなく袋として表示されます。",
+Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip,"この保管施設の最大容量を設定します。",

@@ -1,7 +1,7 @@
 ID,Text,Comment
-Calloatti.Building.WarehousePile.DisplayName,"คลังวัสดุโกดัง",
+Calloatti.Building.WarehousePile.DisplayName,"กองในคลังสินค้า",
 Calloatti.Building.WarehousePile.Description,"จัดเก็บสินค้าขนาดใหญ่ในคลังสินค้า",
-Calloatti.Building.WarehousePile.FlavorDescription,"อะไรเอ่ยดีกว่าคลังวัสดุ ก็คลังวัสดุโกดังไง",
+Calloatti.Building.WarehousePile.FlavorDescription,"อะไรจะดีไปกว่ากอง? กองในคลังสินค้าไง!",
 Calloatti.Config.UseBagsForDirt.Label,"ใช้ถุงสำหรับดิน",
-Calloatti.Config.UseBagsForDirt.Tooltip,"หากเป็นจริง ดินจะแสดงเป็นถุงแทนที่จะเป็นกอง",
+Calloatti.Config.UseBagsForDirt.Tooltip,"ถ้าเป็นจริง ดินจะแสดงเป็นถุงแทนที่จะเป็นกอง",
 Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip,"กำหนดความจุสูงสุดสำหรับอาคารจัดเก็บนี้",

@@ -1,7 +1,7 @@
 ID,Text,Comment
-Calloatti.Building.WarehousePile.DisplayName,"Lagerstapel",
+Calloatti.Building.WarehousePile.DisplayName,"Lagerhaushaufen",
 Calloatti.Building.WarehousePile.Description,"Lagert sperrige Güter in einem Lagerhaus",
-Calloatti.Building.WarehousePile.FlavorDescription,"Was ist besser als ein Stapel? Ein Lagerstapel",
+Calloatti.Building.WarehousePile.FlavorDescription,"Was ist besser als ein Haufen? Ein Lagerhaushaufen!",
 Calloatti.Config.UseBagsForDirt.Label,"Säcke für Erde verwenden",
-Calloatti.Config.UseBagsForDirt.Tooltip,"Wenn aktiviert, wird Erde als Säcke statt als Stapel dargestellt.",
-Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip,"Legt die maximale Kapazität für dieses Lagergebäude fest.",
+Calloatti.Config.UseBagsForDirt.Tooltip,"Wenn aktiviert, wird Erde als Säcke statt als Haufen dargestellt.",
+Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip,"Legt die maximale Kapazität für dieses Lagerhaus fest.",

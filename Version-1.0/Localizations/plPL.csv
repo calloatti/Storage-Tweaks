@@ -1,7 +1,7 @@
 ID,Text,Comment
-Calloatti.Building.WarehousePile.DisplayName,"Skład magazynowy",
+Calloatti.Building.WarehousePile.DisplayName,"Stos magazynowy",
 Calloatti.Building.WarehousePile.Description,"Przechowuje nieporęczne towary w magazynie",
-Calloatti.Building.WarehousePile.FlavorDescription,"Co jest lepsze niż skład? Skład magazynowy",
-Calloatti.Config.UseBagsForDirt.Label,"Używaj Worków na Ziemię",
-Calloatti.Config.UseBagsForDirt.Tooltip,"Jeśli prawda, Ziemia będzie wizualizowana jako worki zamiast składu.",
+Calloatti.Building.WarehousePile.FlavorDescription,"Co jest lepsze niż stos? Stos magazynowy!",
+Calloatti.Config.UseBagsForDirt.Label,"Używaj worków na ziemię",
+Calloatti.Config.UseBagsForDirt.Tooltip,"Jeśli prawda, ziemia będzie wizualizowana jako worki zamiast stosu.",
 Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip,"Ustawia maksymalną pojemność dla tego budynku magazynowego.",

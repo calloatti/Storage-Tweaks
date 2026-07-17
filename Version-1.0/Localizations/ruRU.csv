@@ -1,7 +1,7 @@
 ID,Text,Comment
 Calloatti.Building.WarehousePile.DisplayName,"Складская куча",
 Calloatti.Building.WarehousePile.Description,"Хранит громоздкие товары на складе",
-Calloatti.Building.WarehousePile.FlavorDescription,"Что лучше кучи? Складская куча",
-Calloatti.Config.UseBagsForDirt.Label,"Использовать Мешки для Земли",
-Calloatti.Config.UseBagsForDirt.Tooltip,"Если true, Земля будет отображаться в виде мешков вместо кучи.",
+Calloatti.Building.WarehousePile.FlavorDescription,"Что лучше кучи? Складская куча!",
+Calloatti.Config.UseBagsForDirt.Label,"Использовать мешки для земли",
+Calloatti.Config.UseBagsForDirt.Tooltip,"Если включено, земля будет отображаться в виде мешков, а не кучи.",
 Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip,"Устанавливает максимальную вместимость для этого складского здания.",
