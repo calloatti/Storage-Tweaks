@@ -1,28 +1,20 @@
-Game Version: 1.0.0.0 - Mod Version: 2.1.1
+* Game Version: 1.0.0.0 - Mod Version: 2.1.1
 - SimpleConfig UI integration
---------------------------------------------------------------------------------
-Game Version: 1.0.0.0 - Mod Version: 2.1.0
+* Game Version: 1.0.0.0 - Mod Version: 2.1.0
 - Added simple mod settings support
 - Added dirt in bags visualizer optional, off by default
 - TODO: A better model for dirt bags
---------------------------------------------------------------------------------
-Game Version: 1.0.0.0 - Mod Version: 2.0.5
+* Game Version: 1.0.0.0 - Mod Version: 2.0.5
 - Fixed thread-safety race conditions in stockpile visualizer scaling.
 - Improved robustness of JSON parsing by utilizing Regex.
 - Replaced magic numbers with defined constants for volume calculations.
---------------------------------------------------------------------------------
-Game Version: 1.0.0.0 - Mod Version: 2.0.4
+* Game Version: 1.0.0.0 - Mod Version: 2.0.4
 - Got rid of reflection.
---------------------------------------------------------------------------------
-Game Version: 1.0.0.0 - Mod Version: 2.0.3
+* Game Version: 1.0.0.0 - Mod Version: 2.0.3
 - Refactored to use simpleconfig.
---------------------------------------------------------------------------------
-Game Version: 1.0.0.0 - Mod Version: 2.0.2
+* Game Version: 1.0.0.0 - Mod Version: 2.0.2
 - Moved config file to PlayerData. Default capacities are used when creating the file for the first time
---------------------------------------------------------------------------------
-Game Version: 1.0.0.0 - Mod Version: 2.0.1
+* Game Version: 1.0.0.0 - Mod Version: 2.0.1
 - Fixed WarehousePile blueprints
---------------------------------------------------------------------------------
-Game Version: 1.0.0.0 - Mod Version: 2.0.1
+* Game Version: 1.0.0.0 - Mod Version: 2.0.1
 - Added Warehouse Pile
---------------------------------------------------------------------------------
