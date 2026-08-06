@@ -2,16 +2,7 @@
   "BuildingSpec": {
     "SelectionSoundName": "Pile",
     "LoopingSoundName": "",
-    "BuildingCost": [
-      {
-        "Id": "Log",
-        "Amount": 60
-      },
-      {
-        "Id": "Plank",
-        "Amount": 80
-      }
-    ],
+    "BuildingCost": [{"Id": "Log", "Amount": 60}, {"Id": "Plank", "Amount": 80}],
     "ScienceCost": 250,
     "PlaceFinished": false,
     "FinishableWithBeaversOnSite": true,
@@ -25,10 +16,7 @@
     "ConstructionModeModel": "Finished",
     "UndergroundModelDepth": 0
   },
-  "StockpileSpec": {
-    "MaxCapacity": 1000,
-    "WhitelistedGoodType": "Pileable"
-  },
+  "StockpileSpec": {"MaxCapacity": 1000, "WhitelistedGoodType": "Pileable"},
   "EnterableSpec": {
     "OperatingState": "Finished",
     "LimitedCapacityFinished": false,
@@ -37,31 +25,14 @@
     "CapacityUnfinished": 0
   },
   "StockpileGoodPileVisualizerSpec": {
-    "CenterOffset": {
-      "X": 0.5,
-      "Y": 0.5,
-      "Z": 0.09
-    },
-    "GoodPileVisualizations": [
-      "Log",
-      "Plank",
-      "TreatedPlank",
-      "ScrapMetal",
-      "MetalBlock"
-    ]
+    "CenterOffset": {"X": 0.5, "Y": 0.5, "Z": 0.09},
+    "GoodPileVisualizations": ["Log", "Plank", "TreatedPlank", "ScrapMetal", "MetalBlock"]
   },
   "StockpilePlaneVisualizerSpec": {
     "StockpilePlaneVisualizations": [
       {
-        "CenterOffset": {
-          "X": 0.0,
-          "Y": 0.0,
-          "Z": 0.0
-        },
-        "MovementRange": {
-          "X": 0.09,
-          "Y": 0.70
-        },
+        "CenterOffset": {"X": 0, "Y": 0, "Z": 0},
+        "MovementRange": {"X": 0.09, "Y": 0.7},
         "GoodVisualizationId": "Dirt",
         "GoodVisualizationVariant": "3x3"
       }
@@ -74,11 +45,7 @@
     "DisablingFeatureToggle": ""
   },
   "BlockObjectSpec": {
-    "Size": {
-      "X": 3,
-      "Y": 3,
-      "Z": 2
-    },
+    "Size": {"X": 3, "Y": 3, "Z": 2},
     "Blocks": [
       {
         "MatterBelow": "GroundOrStackable",
@@ -207,26 +174,12 @@
         "Underground": false
       }
     ],
-    "Entrance": {
-      "HasEntrance": true,
-      "Coordinates": {
-        "X": 1,
-        "Y": -1,
-        "Z": 0
-      }
-    },
+    "Entrance": {"HasEntrance": true, "Coordinates": {"X": 1, "Y": -1, "Z": 0}},
     "BaseZ": 0,
     "Overridable": false,
     "Flippable": false
   },
-  "BuildingAccessibleSpec": {
-    "LocalAccess": {
-      "X": 1.5,
-      "Y": 0.0,
-      "Z": 0.2
-    },
-    "ForceOneFinalAccess": false
-  },
+  "BuildingAccessibleSpec": {"LocalAccess": {"X": 1.5, "Y": 0, "Z": 0.2}, "ForceOneFinalAccess": false},
   "BlockObjectNavMeshSettingsSpec": {
     "NoAutoWalls": false,
     "GenerateFloorsOnStackable": true,
@@ -239,14 +192,7 @@
     "ToolOrder": 22,
     "ToolShape": "Square",
     "Layout": "Single",
-    "CustomPivot": {
-      "HasCustomPivot": false,
-      "Coordinates": {
-        "X": 0.0,
-        "Y": 0.0,
-        "Z": 0.0
-      }
-    },
+    "CustomPivot": {"HasCustomPivot": false, "Coordinates": {"X": 0, "Y": 0, "Z": 0}},
     "CanBeAttachedToTerrainSide": false,
     "DevModeTool": false
   },
@@ -256,31 +202,12 @@
     "FlavorDescriptionLocKey": "Calloatti.Building.WarehousePile.FlavorDescription",
     "Icon": "Buildings/Storage/WarehousePileIcon"
   },
-  "ConstructionSiteProgressVisualizerSpec": {
-    "ProgressThresholds": [
-      0.0
-    ]
-  },
+  "ConstructionSiteProgressVisualizerSpec": {"ProgressThresholds": [0]},
   "Children": {
     "#Finished": {
-      "TimbermeshSpec": {
-        "Model": "Buildings/Storage/LargeWarehouse/LargeWarehouse.IronTeeth.Model"
-      },
+      "TimbermeshSpec": {"Model": "Buildings/Storage/LargeWarehouse/LargeWarehouse.IronTeeth.Model"},
       "CollidersSpec": {
-        "BoxColliders": [
-          {
-            "Center": {
-              "X": 1.5,
-              "Y": 1.0,
-              "Z": 1.5
-            },
-            "Size": {
-              "X": 3.0,
-              "Y": 2.0,
-              "Z": 3.0
-            }
-          }
-        ],
+        "BoxColliders": [{"Center": {"X": 1.5, "Y": 1, "Z": 1.5}, "Size": {"X": 3, "Y": 2, "Z": 3}}],
         "SphereColliders": [],
         "CapsuleColliders": []
       }
@@ -295,20 +222,7 @@
             "Model": "Buildings/Storage/LargeWarehouse/LargeWarehouse.IronTeeth.ConstructionStage0.Model"
           },
           "CollidersSpec": {
-            "BoxColliders": [
-              {
-                "Center": {
-                  "X": 1.5,
-                  "Y": 0.05,
-                  "Z": 1.5
-                },
-                "Size": {
-                  "X": 3.0,
-                  "Y": 0.1,
-                  "Z": 3.0
-                }
-              }
-            ],
+            "BoxColliders": [{"Center": {"X": 1.5, "Y": 0.05, "Z": 1.5}, "Size": {"X": 3, "Y": 0.1, "Z": 3}}],
             "SphereColliders": [],
             "CapsuleColliders": []
           }
