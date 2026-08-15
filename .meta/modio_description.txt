@@ -1,0 +1,11 @@
+<p>Allows changing the capacity of all storage buildings including modded ones.</p>
+<p>Also solves the problem of pile storages drawing tall piles of items when increasing the capacity using a mod.</p>
+<p>If you add a mod that adds storage buildings, they will be added to the config file when starting the game.</p>
+<h3 id="settings">Settings:</h3>
+<p>Settings - Mod Settings (settings are saved in \PlayerData)</p>
+<hr />
+<p><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3682179025">Mods on Steam</a></p>
+<p><a href="https://mod.io/u/calloatti/?_sort=name">Mods on mod-dot-io</a></p>
+<p><a href="https://github.com/search?q=owner%3Acalloatti+sort%3Aname-asc+%22Timberborn+Mod%22&amp;type=repositories">Mods on Github</a></p>
+<p><a href="https://github.com/calloatti/ModZips">Mod zip files</a></p>
+

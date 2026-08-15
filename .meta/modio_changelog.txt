@@ -1,0 +1,2 @@
+* Game Version: 1.0.0.0 - Mod Version: 2.1.2
+- Add color dot to icon
