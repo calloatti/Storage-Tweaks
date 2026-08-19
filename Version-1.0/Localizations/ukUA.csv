@@ -1,7 +1,7 @@
 ID,Text,Comment
-Calloatti.Building.WarehousePile.DisplayName,"Складська купа",
-Calloatti.Building.WarehousePile.Description,"Зберігає громіздкі товари на складі",
-Calloatti.Building.WarehousePile.FlavorDescription,"Що краще за купу? Складська купа!",
-Calloatti.Config.UseBagsForDirt.Label,"Використовувати мішки для землі",
+Calloatti.Building.WarehousePile.Description,Зберігає громіздкі товари на складі,
+Calloatti.Building.WarehousePile.DisplayName,Складська купа,
+Calloatti.Building.WarehousePile.FlavorDescription,Що краще за купу? Складська купа!,
+Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip,Встановлює максимальну місткість для цієї складської будівлі.,
+Calloatti.Config.UseBagsForDirt.Label,Використовувати мішки для землі,
 Calloatti.Config.UseBagsForDirt.Tooltip,"Якщо увімкнено, земля буде відображатися у вигляді мішків, а не купи.",
-Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip,"Встановлює максимальну місткість для цієї складської будівлі.",

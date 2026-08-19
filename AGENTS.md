@@ -97,3 +97,8 @@ Version-1.0/
 - Check `Player.log` for `[StorageTweaks]` prefix logs
 - Config file at `%USERPROFILE%\AppData\LocalLow\Mechanistry\Timberborn\StorageTweaks.txt`
 - Unity build log at `Version-1.0/unitybuild.log`
+
+## Hard Rule
+DO NOT EVER TOUCH THE DEPLOY FOLDER.
+
+BUILD DOES EVERYTHING, NEVER EVER MESS WITH THE DEPLOY PROCESS.
