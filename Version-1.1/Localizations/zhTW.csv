@@ -1,0 +1,7 @@
+ID,Text,Comment
+Calloatti.Building.WarehousePile.Description,在倉庫中儲存 bulky 貨物,
+Calloatti.Building.WarehousePile.DisplayName,倉庫堆,
+Calloatti.Building.WarehousePile.FlavorDescription,什麼比一堆更好？一堆倉庫堆！,
+Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip,設定此儲存建築的最大容量。,
+Calloatti.Config.UseBagsForDirt.Label,使用袋子裝泥土,
+Calloatti.Config.UseBagsForDirt.Tooltip,如果啟用，泥土將以袋子的形式顯示，而不是堆狀。,

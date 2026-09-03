@@ -1,0 +1,38 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.4.6f1
+CRC: 3497489838
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 4f485d8f565e5fe4197765d0f9e3575a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 92a78022d1872db9d71992c399c761d7
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: da4d7f7cb725f14f0460aba1e890fbb5
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 1163566474, guid: 0dcb2ad38d3b076633e495e358136d16, type: 3}
+- Class: 114
+  Script: {fileID: 58535385, guid: eba8ecbfe24c3ba07cc34b52f13e0eaa, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Timberborn.TimbermeshEditorTools
+  ClassName: Timberborn.TimbermeshEditorTools.NodeMetadata
+Assets:
+- Assets/Mods/Storage Tweaks/AssetBundles/Resources/StockpileGoodModels/1Bag.timbermesh
+- Assets/Mods/Storage Tweaks/AssetBundles/Resources/StockpileGoodModels/4Bags.timbermesh
+Dependencies: []

@@ -1,0 +1,7 @@
+ID,Text,Comment
+Calloatti.Building.WarehousePile.Description,Stocke les marchandises volumineuses dans un entrepôt,
+Calloatti.Building.WarehousePile.DisplayName,Tas d'entrepôt,
+Calloatti.Building.WarehousePile.FlavorDescription,Quoi de mieux qu'un tas ? Un tas d'entrepôt !,
+Calloatti.Config.StorageBuilding.MaxCapacity.Tooltip,Définit la capacité maximale pour ce bâtiment de stockage.,
+Calloatti.Config.UseBagsForDirt.Label,Utiliser des sacs pour la terre,
+Calloatti.Config.UseBagsForDirt.Tooltip,"Si vrai, la terre sera visualisée comme des sacs au lieu d'un tas.",

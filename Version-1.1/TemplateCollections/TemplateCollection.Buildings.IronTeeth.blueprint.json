@@ -1,0 +1,6 @@
+﻿{
+  "TemplateCollectionSpec": {
+    "CollectionId": "Buildings.IronTeeth",
+    "Blueprints#append": ["Buildings/Storage/WarehousePile.IronTeeth.blueprint"]
+  }
+}
